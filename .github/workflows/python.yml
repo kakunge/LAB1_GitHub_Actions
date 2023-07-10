@@ -5,9 +5,9 @@ on: workflow_dispatch
 jobs:
   job1:
       runs-on: ubuntu-latest
-      defaults:
-        run: 
-          working-directory: ./
+#       defaults:
+#         run: 
+#           working-directory: ./
       strategy:
         matrix:
           python-version: ["3.8"]
@@ -20,7 +20,7 @@ jobs:
         - name: Archive Python version
           run: |
             mkdir -p path/artifacts
-            python -c "import sys; print(sys.version)" > path/artifacts/version-3.9.txt
+            python -c "import sys; print(sys.version)" > path/artifacts/version-3.8.txt
         - name: Upload Artifact
           uses: actions/upload-artifact@v3
           with:
