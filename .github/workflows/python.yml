@@ -3,23 +3,23 @@ name: Python
 on: workflow_dispatch
 
 jobs:
-  job1:
-      runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          python-version: ["3.8", "3.9", "3.10"]
-      steps:
-        - uses: actions/checkout@v3
-        - name: Set up Python ${{ matrix.python-version }}
-          uses: actions/setup-python@v4
-          with:
-            python-version: ${{ matrix.python-version }}
-        - name: Archive Python version
-          run: |
-            mkdir -p path/artifacts
-            python -c "import sys; print(sys.version)" > path/artifacts/version-${{ matrix.python-version }}.txt
-        - name: Upload Artifact
-          uses: actions/upload-artifact@v3
-          with:
-            name: my-artifact
-            path: path/artifacts/version-${{ matrix.python-version }}.txt
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10"]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Archive Python version
+        run: |
+          mkdir -p path/artifacts
+          python -c "import sys; print(sys.version)" > path/artifacts/version-${{ matrix.python-version }}.txt
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: path/artifacts/version-${{ matrix.python-version }}.txt
